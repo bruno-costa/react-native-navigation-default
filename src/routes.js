@@ -1,9 +1,11 @@
-import React from 'react'
-import { Button } from 'react-native'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import React, { Component } from 'react'
+import { Dimensions } from 'react-native'
+import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 
 import MainPage from './Pages/Main'
+import ContentPage from './Pages/Content'
 import colors from './Styles/colors'
+import SideMenu from './SideMenu'
 
 const RootStack = createStackNavigator({
   Main: {
@@ -11,23 +13,33 @@ const RootStack = createStackNavigator({
     navigationOptions: {
       headerTitle: "Home"
     }
-  }
+  },
+  Content: ContentPage,
+  Content2: ContentPage
 }, {
   initialRouteName: 'Main',
-  navigationOptions: {
+  headerLayoutPreset: 'center',
+  defaultNavigationOptions: {
     headerTintColor: colors.main,
-    headerStyle: {
-      backgroundColor: '#FFF'
+    headerTitleStyle: {
+      fontWeight: 'normal',
     },
-    headerLeft: (<Button title='..' color={colors.main} />)
+    headerStyle: {
+      backgroundColor: '#FFF',
+    },
+    //headerLeft: (<... />)
   }
 })
 
-export default createAppContainer(RootStack);
-/*
-export default class App extends React.Component {
+
+const AppContainer = createAppContainer(createDrawerNavigator({ RootStack }, {
+  drawerWidth: Dimensions.get('window').width - 48,
+  contentComponent: SideMenu,
+  hideStatusBar: true
+}));
+
+export default class App extends Component {
   render() {
-    return <AppContainer style={{flex: 1, backgroundColor: 'red'}} />;
+    return <AppContainer />;
   }
 }
-*/
