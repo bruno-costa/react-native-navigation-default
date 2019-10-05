@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, View, Text, ImageBackground, Image } from 'react-native';
-import { NavigationActions, DrawerItems, SafeAreaView } from 'react-navigation';
 
-import color from '../Styles/colors';
+import colors from '$src/Styles/colors';
 
 class SideMenu extends Component {
   navigateToScreen = (route, param = {}) => () => {
-    //const navigateAction = NavigationActions.navigate(route);
     this.props.navigation.navigate(route, param);
   }
 
 
   render() {
-    console.log(this.props)
+    const imageBgSource = require('$assets/headerBg.jpg')
     return (
       <View style={styles.container}>
         <ScrollView>
-          <ImageBackground style={styles.headerContainer} source={require('../../assets/headerBg.jpg')}>
+          <ImageBackground style={styles.headerContainer} source={imageBgSource}>
             <Image style={styles.headerAvatar} source={{uri: 'https://randomuser.me/api/portraits/men/62.jpg'}} />
             <Text style={styles.headerNome}>Luciano Borges</Text>
             <Text style={styles.headerEmail}>lucianoborges@gmail.com</Text>
@@ -25,11 +23,11 @@ class SideMenu extends Component {
           <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Main')}>
             Home
           </Text>
-          <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Content')}>
-            Content
+          <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Screen2')}>
+            Fix Content
           </Text>
-          <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Content2', {title: 'Second Content', id: 42})}>
-            Second Content
+          <Text style={styles.navItemStyle} onPress={this.navigateToScreen('ScreenDinamic', {title: 'Second Content', text: 42})}>
+            Dinamic Content
           </Text>
         </ScrollView>
       </View>
@@ -53,17 +51,17 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   headerNome: {
-    color: '#FFF',
+    color: colors.primary,
     fontSize: 22,
     fontWeight: 'bold'
   },
   headerEmail: {
-    color: '#FFF',
+    color: colors.font,
     fontSize: 14
   },
   headerBorder: {
     height: 8,
-    backgroundColor: color.main,
+    backgroundColor: colors.primary,
     position: 'absolute',
     bottom: 0,
     left: 0,

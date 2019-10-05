@@ -2,20 +2,21 @@ import React, { Component } from 'react'
 import { Dimensions } from 'react-native'
 import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 
-import MainPage from './Pages/Main'
-import ContentPage from './Pages/Content'
-import colors from './Styles/colors'
-import SideMenu from './SideMenu'
+import styleColor from '$src/Styles/colors'
+import MainScreen from '$src/Screens/Main'
+import FixContentScreen from '$src/Screens/Content'
+import DinamicContentScreen from '$src/Screens/DinamicContent'
+import SideMenu from '$src/Navigations/SideMenu'
 
 const RootStack = createStackNavigator({
   Main: {
-    screen: MainPage,
+    screen: MainScreen,
     navigationOptions: {
       headerTitle: "Home"
     }
   },
-  Content: ContentPage,
-  Content2: ContentPage
+  Screen2: FixContentScreen,
+  ScreenDinamic: DinamicContentScreen
 }, {
   initialRouteName: 'Main',
   headerLayoutPreset: 'center',
@@ -25,7 +26,7 @@ const RootStack = createStackNavigator({
       fontWeight: 'normal',
     },
     headerStyle: {
-      backgroundColor: '#FFF',
+      backgroundColor: styleColor.background,
     },
     //headerLeft: (<... />)
   }
